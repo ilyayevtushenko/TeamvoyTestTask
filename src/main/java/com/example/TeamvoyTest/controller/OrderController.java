@@ -1,8 +1,9 @@
 package com.example.TeamvoyTest.controller;
 
 
-import com.example.TeamvoyTest.Service.OrderService;
-import com.example.TeamvoyTest.model.entity.Order;
+import com.example.TeamvoyTest.model.domain.Order;
+import com.example.TeamvoyTest.model.entity.OrderEntity;
+import com.example.TeamvoyTest.service.OrderService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,9 +29,8 @@ public class OrderController {
 
         @PostMapping
         @ResponseStatus(HttpStatus.CREATED)
-        public Order create(@RequestBody Order order) {
-            return orderService.createOrder(order);
-
+        public void create(@RequestBody Order order) {
+            orderService.createOrder(order);
         }
 
         @DeleteMapping("/{id}")
@@ -40,11 +40,11 @@ public class OrderController {
         }
 
         @PutMapping("/{id}")
-        public Order updateBook(@RequestBody Order order, @PathVariable Long id) {
+        public void updateOrder(@RequestBody Order order, @PathVariable Long id) {
             if (order.getId() != id) {
                 throw new RuntimeException();
             }
             orderService.findById(id);
-            return orderService.createOrder(order);
+            orderService.createOrder(order);
         }
     }

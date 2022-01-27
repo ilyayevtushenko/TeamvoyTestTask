@@ -1,12 +1,13 @@
 package com.example.TeamvoyTest.controller;
 
-import com.example.TeamvoyTest.Service.ItemService;
-import com.example.TeamvoyTest.model.entity.Item;
-import com.example.TeamvoyTest.model.entity.Order;
+import com.example.TeamvoyTest.model.domain.Item;
+import com.example.TeamvoyTest.model.entity.ItemEntity;
+import com.example.TeamvoyTest.service.ItemService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/items")
@@ -15,12 +16,14 @@ public class ItemController {
     private final ItemService itemService;
 
     @GetMapping
-    public Iterable findAll() {
+    public Set<Item> findAll() {
         return itemService.findAll();
     }
 
     @DeleteMapping
-    public void deleteCheapestItem() {
-        itemService.deleteItem(itemService.findCheapestItem());
+    public Item takeCheapestItem() {
+        Item cheapestItemEntity = itemService.findCheapestItem();
+        itemService.deleteItem(cheapestItemEntity);
+        return cheapestItemEntity;
     }
 }

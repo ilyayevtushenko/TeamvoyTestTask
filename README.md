@@ -1,8 +1,8 @@
 # TeamvoyTestTask
 Create a rest controller for creating orders in storage (any storage can be used).
-The order has three fields: price, quantity, item (please chose any three).
-The order is valid for 10 minutes (not valid orders can be deleted).
-Create another rest controller which will return the requested item at the lowest price (the number of items must be reduced in storage). If there are not enough items, return all available.
+The orderEntity has three fields: price, quantity, itemEntity (please chose any three).
+The orderEntity is valid for 10 minutes (not valid orders can be deleted).
+Create another rest controller which will return the requested itemEntity at the lowest price (the number of itemEntities must be reduced in storage). If there are not enough itemEntities, return all available.
 
 Requirements:
 

@@ -6,7 +6,7 @@ import java.time.temporal.ChronoUnit;
 
 
 @Entity
-public class Order {
+public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
@@ -20,7 +20,7 @@ public class Order {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "items_id")
-    private Item item;
+    private ItemEntity itemEntity;
 
     private LocalDateTime creationTime;
 
@@ -54,12 +54,12 @@ public class Order {
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
-    public Item getItem() {
-        return item;
+    public ItemEntity getItemEntity() {
+        return itemEntity;
     }
 
-    public void setItem(Item item) {
-        this.item = item;
+    public void setItemEntity(ItemEntity itemEntity) {
+        this.itemEntity = itemEntity;
     }
 
     public LocalDateTime getCreationTime() {

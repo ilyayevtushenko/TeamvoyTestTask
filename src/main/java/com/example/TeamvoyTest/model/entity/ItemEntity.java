@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 
 @Entity
-public class Item {
+public class ItemEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)

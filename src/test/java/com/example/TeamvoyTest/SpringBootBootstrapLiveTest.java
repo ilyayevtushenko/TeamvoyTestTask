@@ -1,6 +1,6 @@
 package com.example.TeamvoyTest;
 
-import com.example.TeamvoyTest.model.entity.Order;
+import com.example.TeamvoyTest.model.entity.OrderEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import io.restassured.RestAssured;
@@ -21,12 +21,12 @@ public class SpringBootBootstrapLiveTest {
 
     @Test
     public void whenGetCreatedOrderById_thenOK() {
-        final Order order = createRandomOrder();
-        final String location = createOrderAsUri(order);
+        final OrderEntity orderEntity = createRandomOrder();
+        final String location = createOrderAsUri(orderEntity);
 
         final Response response = RestAssured.get(location);
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
-        assertEquals(order.getPrice(), response.jsonPath()
+        assertEquals(orderEntity.getPrice(), response.jsonPath()
                 .get("price"));
     }
 
@@ -39,37 +39,37 @@ public class SpringBootBootstrapLiveTest {
     // POST
     @Test
     public void whenCreateNewOrder_thenCreated() {
-        final Order order = createRandomOrder();
+        final OrderEntity orderEntity = createRandomOrder();
 
         final Response response = RestAssured.given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .body(order)
+                .body(orderEntity)
                 .post(API_ROOT);
         assertEquals(HttpStatus.CREATED.value(), response.getStatusCode());
     }
 
     @Test
     public void whenInvalidOrder_thenError() {
-        final Order order = createRandomOrder();
-        order.setPrice(null);
+        final OrderEntity orderEntity = createRandomOrder();
+        orderEntity.setPrice(null);
 
         final Response response = RestAssured.given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .body(order)
+                .body(orderEntity)
                 .post(API_ROOT);
         assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatusCode());
     }
 
     @Test
     public void whenUpdateCreatedOrder_thenUpdated() {
-        final Order order = createRandomOrder();
-        final String location = createOrderAsUri(order);
+        final OrderEntity orderEntity = createRandomOrder();
+        final String location = createOrderAsUri(orderEntity);
 
-        order.setId(Long.parseLong(location.split("api/orders/")[1]));
-        order.setPrice(25.0);
+        orderEntity.setId(Long.parseLong(location.split("api/orders/")[1]));
+        orderEntity.setPrice(25.0);
         Response response = RestAssured.given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .body(order)
+                .body(orderEntity)
                 .put(location);
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
 
@@ -82,8 +82,8 @@ public class SpringBootBootstrapLiveTest {
 
     @Test
     public void whenDeleteCreatedBook_thenOk() {
-        final Order order = createRandomOrder();
-        final String location = createOrderAsUri(order);
+        final OrderEntity orderEntity = createRandomOrder();
+        final String location = createOrderAsUri(orderEntity);
 
         Response response = RestAssured.delete(location);
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
@@ -94,17 +94,17 @@ public class SpringBootBootstrapLiveTest {
 
     // ===============================
 
-    private Order createRandomOrder() {
-        final Order order = new Order();
-        order.setPrice(20.0);
-        order.setQuantity(15);
-        return order;
+    private OrderEntity createRandomOrder() {
+        final OrderEntity orderEntity = new OrderEntity();
+        orderEntity.setPrice(20.0);
+        orderEntity.setQuantity(15);
+        return orderEntity;
     }
 
-    private String createOrderAsUri(Order order) {
+    private String createOrderAsUri(OrderEntity orderEntity) {
         final Response response = RestAssured.given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .body(order)
+                .body(orderEntity)
                 .post(API_ROOT);
         return API_ROOT + "/" + response.jsonPath()
                 .get("id");
