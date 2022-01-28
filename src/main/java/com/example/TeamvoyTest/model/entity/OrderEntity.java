@@ -70,5 +70,28 @@ public class OrderEntity {
         this.creationTime = creationTime;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof OrderEntity)) return false;
 
+        OrderEntity that = (OrderEntity) o;
+
+        if (getId() != that.getId()) return false;
+        if (!getPrice().equals(that.getPrice())) return false;
+        if (!getQuantity().equals(that.getQuantity())) return false;
+        if (getItemEntity() != null ? !getItemEntity().equals(that.getItemEntity()) : that.getItemEntity() != null)
+            return false;
+        return getCreationTime().equals(that.getCreationTime());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (getId() ^ (getId() >>> 32));
+        result = 31 * result + getPrice().hashCode();
+        result = 31 * result + getQuantity().hashCode();
+        result = 31 * result + (getItemEntity() != null ? getItemEntity().hashCode() : 0);
+        result = 31 * result + getCreationTime().hashCode();
+        return result;
+    }
 }

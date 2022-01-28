@@ -39,4 +39,24 @@ public class ItemEntity {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ItemEntity)) return false;
+
+        ItemEntity that = (ItemEntity) o;
+
+        if (getId() != null ? !getId().equals(that.getId()) : that.getId() != null) return false;
+        if (getPrice() != null ? !getPrice().equals(that.getPrice()) : that.getPrice() != null) return false;
+        return getName() != null ? getName().equals(that.getName()) : that.getName() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + (getPrice() != null ? getPrice().hashCode() : 0);
+        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+        return result;
+    }
 }

@@ -24,6 +24,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void createOrder(Order order) {
+        if (order == null) throw new IllegalArgumentException();
         order.setCreationTime(LocalDateTime.now());
         orderRepository.save(orderMapper.orderToOrderEntity(order));
     }
