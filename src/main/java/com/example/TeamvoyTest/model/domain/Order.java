@@ -1,7 +1,5 @@
 package com.example.TeamvoyTest.model.domain;
 
-
-import com.example.TeamvoyTest.model.entity.ItemEntity;
 import lombok.Data;
 
 import java.time.LocalDateTime;

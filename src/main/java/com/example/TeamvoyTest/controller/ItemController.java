@@ -1,7 +1,6 @@
 package com.example.TeamvoyTest.controller;
 
 import com.example.TeamvoyTest.model.domain.Item;
-import com.example.TeamvoyTest.model.entity.ItemEntity;
 import com.example.TeamvoyTest.service.ItemService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

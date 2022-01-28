@@ -2,7 +2,6 @@ package com.example.TeamvoyTest.controller;
 
 
 import com.example.TeamvoyTest.model.domain.Order;
-import com.example.TeamvoyTest.model.entity.OrderEntity;
 import com.example.TeamvoyTest.service.OrderService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
